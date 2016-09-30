@@ -3,6 +3,7 @@
 
 """
 对率回归：选择两个UCI数据集，比较10折交叉验证法和留一法所估计出的对率回归的错误率。
+    iris 数据集
 """
 import numpy as np
 import pandas as pd
@@ -28,7 +29,6 @@ def validate():
     for label in df['label'].values[:100]:
         labels.append(0) if label == 'Iris-setosa' else labels.append(1)
     Y = np.mat(labels).T
-
     # 10折交差验证
     errs_count = 0  # 记录错误分类的总数
     k = 100
@@ -64,11 +64,10 @@ def validate():
         for i in range(50 + 5 * j, 55 + 5 * j):
             p1 = 1 - 1.0 / (1 + exp(X[i] * W))
             if p1 < 0.5: errs_count += 1
-    print('Error Rate: %f' % ((errs_count / 10) * 100.0))
+    print('Error Rate: %f%%' % ((errs_count / 10) * 100.0))
 
     # 留一法
     errs_count = 0  # 记录错误分类的总数
-    k = 100
     for j in range(k):
         W = np.mat(np.zeros((n, 1)))
         old_l, cur_l = 0, 0  # 记录上次计算的 l 值， 当前的 l 值
@@ -99,7 +98,7 @@ def validate():
             if p1 >= 0.5: errs_count += 1
         else:
             if p1 < 0.5: errs_count += 1
-    print('Error Rate: %f' % ((errs_count / 10) * 100.0))
+    print('Error Rate: %f%%' % (1.0 * errs_count))
 
 
 if __name__ == '__main__':

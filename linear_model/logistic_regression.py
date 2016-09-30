@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-对率回归：西瓜数据集3.0ɑ
+对率回归：西瓜数据集
 """
 import csv
 import numpy as np
@@ -18,8 +18,8 @@ def build_csv_file(filename):
         raw_data.append((lines[1].strip().split(' '))[1:])
         for line in lines[2:]:
             (no, density, sugariness, type) = line.strip().split(' ')
-            type = 1 if type == 'good' else 0
-            raw_data.append((density, sugariness, type))
+            label = 1 if type == 'good' else 0
+            raw_data.append((density, sugariness, label))
 
     with open(filename, 'w', newline='') as csv_file:
         writer = csv.writer(csv_file, dialect='excel')

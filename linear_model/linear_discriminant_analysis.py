@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-线性判别分析(LDA)：西瓜数据集3.0ɑ
+线性判别分析(LDA)：西瓜数据集
 """
 import numpy as np
 import pandas as pd
@@ -13,6 +13,7 @@ csv_file = 'watermelon.csv'
 
 def model_training():
     df = pd.read_csv(csv_file, encoding="utf-8")
+    m, n = df.shape
     df0, df1 = df[df.Label == 0], df[df.Label == 1]
     m0, m1 = df0.shape[0], df1.shape[0]
     X0 = np.mat(df0[['Density', 'Sugariness']].values[:])
@@ -21,7 +22,7 @@ def model_training():
     mean0 = np.mat(np.average(X0, axis=0)).T
     mean1 = np.mat(np.average(X1, axis=0)).T
     # 计算协方差矩阵
-    covmatrix0, covmatrix1 = np.mat(np.zeros((2, 2))), np.mat(np.zeros((2, 2)))
+    covmatrix0, covmatrix1 = np.mat(np.zeros((n - 1, n - 1))), np.mat(np.zeros((n - 1, n - 1)))
     for i in range(m0):
         covmatrix0 += (X0[i].T - mean0) * (X0[i] - mean0.T)
     for i in range(m1):
