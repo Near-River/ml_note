@@ -74,7 +74,6 @@ def k_NN(X, sample, k=3):
 def knn_plot(X, sample, neighbors):
     plt.figure(1)
     ax = plt.subplot(111)
-    i = 0
     colors = ['red', 'yellow', 'blue']
     marks = ['s', 'o']
 
@@ -92,7 +91,7 @@ def knn_plot(X, sample, neighbors):
     ax.scatter(xcord2, ycord2, s=30, c=colors[1], marker=marks[0])
     ax.scatter([sample[-3]], [sample[-2]], s=30, c=colors[2], marker=marks[1])
     plt.xlabel('Density')
-    plt.ylabel('Sugariness')
+    plt.ylabel('Sugar_ratio')
     plt.title('k-NN')
     plt.show()
 
